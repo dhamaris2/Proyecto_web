@@ -6,50 +6,73 @@
     <title>Pasajeros</title>
 </head>
 <body>
-    <h1>Registro de Pasajeros</h1>
+    <div class="contenedor">
+        <h1>Registro de Pasajeros</h1>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre"/>
-    <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"/>
+        <br><br>
 
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" name="apellido"/>
-    <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido"/>
+        <br><br>
 
-    <label for="npasaporte">Número de Pasaporte:</label>
-    <input type="text" id="npasaporte" name="npasaporte"/>
-    <br>
+        <label for="npasaporte">Número de Pasaporte:</label>
+        <input type="text" id="npasaporte" name="npasaporte"/>
+        <br><br>
 
-    <label for="fnacimiento">Fecha de Nacimiento:</label>
-    <input type="datetime" id="fnacimiento" name="fnacimiento"/>
-    <br>
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="datetime-local" id="fecha_nacimiento" name="fecha_nacimiento"/>
+        <br><br>
 
-    <label for="genero">Genero:</label>
-    <br>
-    <label for="masculino">Masculino:</label>
-    <input type="radio" id="genero" name="genero" />
-    <label for="femenino">Femenino:</label>
-    <input type="radio" id="genero" name="genero" />
-    <br>
+        <label for="genero">Genero:</label>
+        <br><br>
+        
+        <label for="masculino">Masculino:</label>
+        <input type="radio" id="genero" name="genero" />
+        <label for="femenino">Femenino:</label>
+        <input type="radio" id="genero" name="genero" />
+        <br><br>
 
-    <label for="correo">Correo Electronico:</label>
-    <input type="email" id="correo" name="correo" />
-    <br>
+        <label for="correo">Correo Electronico:</label>
+        <input type="email" id="correo" name="correo" />
+        <br><br>
 
-    <label for="telefono">Numero Telefonico:</label>
-    <input type="text" id="telefono" name="telefono" />
-    <br>
+        <label for="telefono">Numero Telefonico:</label>
+        <input type="text" id="telefono" name="telefono" />
+        <br><br>
 
-    <!--<label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" />
-    <br> -->
+        <label for="cemergencia">Contacto de Emergencia:</label>
+        <input type="text" id="cemergencia" name="cemergencia" />
+        <br><br>
 
-    <label for="cemergencia">Contacto de Emergencia:</label>
-    <input type="text" id="cemergencia" name="cemergencia" />
-    <br>
+        <button onclick="agregarFila()">Agregar a la tabla</button>
+        <br><br>
 
-    <button onclick="Guardar()">Guardar</button>
-    <button onclick="Cancelar()">Cancelar</button>
+        <table id="tDatos">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Numero de Pasaporte</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Genero</th>
+                <th>Correo Electronico</th>
+                <th>Numero Telefonico</th>
+                <th>Contacto de Emergencia</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Filas agregadas aparecerán aquí -->
+            </tbody>
+          </table>
+          <br>
+
+        <button onclick="Guardar()">Guardar</button>
+        <button onclick="Cancelar()">Cancelar</button>
+     
+    </div>  
 
 </body>
 </html>
