@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Vuelos</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    form, table { margin-top: 20px; }
+    input, select, button { margin: 5px; padding: 8px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+  </style>
+</head>
+<body>
+
+  <h1>Gestión de Vuelos</h1>
+
+  <form id="formVuelo">
+    <input type="hidden" id="indexEditar" />
+    <input type="text" id="numero" placeholder="Número de vuelo" required />
+    <input type="text" id="origen" placeholder="Origen" required />
+    <input type="text" id="destino" placeholder="Destino" required />
+    <input type="date" id="fechaSalida" required />
+    <input type="time" id="horaSalida" required />
+    <input type="date" id="fechaLlegada" required />
+    <input type="time" id="horaLlegada" required />
+    <input type="text" id="aerolinea" placeholder="Aerolínea" required />
+    <select id="estado" required>
+      <option value="">Estado</option>
+      <option value="Programado">Programado</option>
+      <option value="Retrasado">Retrasado</option>
+      <option value="Cancelado">Cancelado</option>
+    </select>
+    <button type="submit">Agregar / Actualizar Vuelo</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Salida</th>
+        <th>Llegada</th>
+        <th>Aerolínea</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaVuelos"></tbody>
+  </table>
+
+  <script>
+    const vuelos = [];
+    const form = document.getElementById('formVuelo');
+    const tabla = document.getElementById('tablaVuelos');
+    const indexEditar = document.getElementById('indexEditar');
+
+    function renderizarTabla() {
+      tabla.innerHTML = '';
+      vuelos.forEach((v, i) => {
+        tabla.innerHTML += `
+          <tr>
+            <td>${v.numero}</td>
+            <td>${v.origen}</td>
+            <td>${v.destino}</td>
+            <td>${v.fechaSalida} ${v.horaSalida}</td>
+            <td>${v.fechaLlegada} ${v.horaLlegada}</td>
+            <td>${v.aerolinea}</td>
+            <td>${v.estado}</td>
+            <td>
+              <button onclick="editar(${i})">Editar</button>
+              <button onclick="eliminar(${i})">Eliminar</button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const vuelo = {
+        numero: document.getElementById('numero').value,
+        origen: document.getElementById('origen').value,
+        destino: document.getElementById('destino').value,
+        fechaSalida: document.getElementById('fechaSalida').value,
+        horaSalida: document.getElementById('horaSalida').value,
+        fechaLlegada: document.getElementById('fechaLlegada').value,
+        horaLlegada: document.getElementById('horaLlegada').value,
+        aerolinea: document.getElementById('aerolinea').value,
+        estado: document.getElementById('estado').value
+      };
+
+      if (indexEditar.value === '') {
+        vuelos.push(vuelo); // agregar nuevo
+      } else {
+        vuelos[indexEditar.value] = vuelo; // actualizar existente
+        indexEditar.value = '';
+      }
+
+      form.reset();
+      renderizarTabla();
+    });
+
+    function editar(i) {
+      const v = vuelos[i];
+      document.getElementById('numero').value = v.numero;
+      document.getElementById('origen').value = v.origen;
+      document.getElementById('destino').value = v.destino;
+      document.getElementById('fechaSalida').value = v.fechaSalida;
+      document.getElementById('horaSalida').value = v.horaSalida;
+      document.getElementById('fechaLlegada').value = v.fechaLlegada;
+      document.getElementById('horaLlegada').value = v.horaLlegada;
+      document.getElementById('aerolinea').value = v.aerolinea;
+      document.getElementById('estado').value = v.estado;
+      indexEditar.value = i;
+    }
+
+    function eliminar(i) {
+      if (confirm('¿Eliminar este vuelo?')) {
+        vuelos.splice(i, 1);
+        renderizarTabla();
+      }
+    }
+
+    renderizarTabla();
+  </script>
+
+</body>
+</html>
