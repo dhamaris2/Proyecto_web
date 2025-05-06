@@ -3,34 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Ventas de Boletos Aéreos</title>
-    <link rel="stylesheet" href="CSS/estilos.css">
-
+    <title>Sistema de Gestión de Vuelos</title>
+    <link rel="stylesheet" href="css.css">
 </head>
 <body>
     <header>
-            <h1>Sistema<span>Aéreo</span></h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="vuelos.html">Vuelos</a></li>
-                <li><a href="pasajeros.html">Pasajeros</a></li>
-                <li><a href="venta_boletos.html">Ventas</a></li>
-                <li><a href="aerolineas.html">Aerolíneas</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div>
-        <h2>Panel de Control</h2>
+        <h1>SistemaAéreo</h1>
         <p>Bienvenido al sistema de gestión de ventas de boletos aéreos</p>
-        
-    </div>
-   <!-- Se necesita mejorar acá, pero ya lo hago
-        <footer>
+    </header>
+
+    <main>
+        <section class="quick-actions">
+            <h2>Panel de control</h2>
+            <div class="actions-grid">
+                <a href="vuelos.html" class="action-card">
+                    <i class="fas fa-plane"></i>
+                    <span>Gestión de Vuelos</span>
+                </a>
+                <a href="pasajeros.html" class="action-card">
+                    <i class="fas fa-users"></i>
+                    <span>Gestión de Pasajeros</span>
+                </a>
+                <a href="aerolineas.html" class="action-card">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Gestión de Aerolíneas</span>
+                </a>
+                <a href="venta_boletos.html" class="action-card">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Venta de Boletos</span>
+                </a>
+            </div>
+        </section>
+
+        <br> <br>
+
+        <section class="flight-status">
+            <h2>Estado de Vuelos</h2>
+            <table id="flightTable">
+                <thead>
+                    <tr>
+                        <th>N° Vuelo</th>
+                        <th>Ruta</th>
+                        <th>Horario</th>
+                        <th>Estado</th>
+                        <th>Puerta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se llenarán con JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
         <p>Sistema de Ventas de Boletos Aéreos &copy; 2023 - Sistema Aéreo</p>
         <p>Versión 1.0.0</p>
-    </footer> -->
+    </footer>
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

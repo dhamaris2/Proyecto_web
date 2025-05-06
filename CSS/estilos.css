@@ -1,119 +1,128 @@
-/* Estilos generales para mantener consistencia en el diseño */
+/* Estilos generales */
 :root {
     --primary-color: #0056b3;
     --secondary-color: #003366;
-    --accent-color: #ff7e00;
-    --light-color: #f8f9fa;
     --dark-color: #343a40;
-    --success-color: #28a745;
-    --info-color: #17a2b8;
-    --warning-color: #ffc107;
-    --danger-color: #dc3545;
 }
 
-/* estilos generales y establece una fuente */
-* {
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* da color al fondo y color a las letras */
-body {
     background-color: #f5f5f5;
     color: #333;
-    line-height: 1.6;
 }
 
-/* Header: Da el color azul al encabezado y le da el estilo */
 header {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 2rem;
+    text-align: center;
 }
 
-/* El logo tiene un texto grande y destaca un span con color acento. */
-.logo {
-    display: flex;
-    align-items: center;
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
 }
 
-.logo h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-.logo span {
-    color: var(--accent-color);
-}
-
-/* Navegación: muestra la lista como menú y le da color a sus letras*/
-nav {
-    display: flex;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-/* Contenido Principal */
-.container {
+main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 20px;
+    padding: 0 1rem;
 }
 
-/* Footer: le da el estilo de negro y con el texto espaciado */
+/* Estilos para la tabla de vuelos */
+.flight-status {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.flight-status h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para las acciones rápidas */
+.quick-actions h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-card i {
+    font-size: 2.5rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.action-card span {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
 footer {
     background: var(--dark-color);
     color: white;
     text-align: center;
     padding: 20px;
     margin-top: 40px;
-}
-
-/* Responsive: cambia todo para que se acomode para todas pantallas */
-@media (max-width: 768px) {
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    header {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-    }
-    
-    nav ul {
-        margin-top: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    nav ul li {
-        margin: 5px;
-    }
 }
