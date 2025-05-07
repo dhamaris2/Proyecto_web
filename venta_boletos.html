@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Reservas</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .action-icon {
+            cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Reservas de Vuelo</h1>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="pasajero">Pasajero (registrado):</label>
+            <select id="pasajero" name="pasajero">
+                <option value="">Seleccione un pasajero</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="vuelo">Vuelo (registrado):</label>
+            <select id="vuelo" name="vuelo">
+                <option value="">Seleccione un vuelo</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fechaReserva">Fecha de Reserva:</label>
+            <input type="date" id="fechaReserva" name="fechaReserva"/>
+        </div>
+
+        <div class="form-group">
+            <label for="codigoReserva">Código de Reserva:</label>
+            <input type="text" id="codigoReserva" name="codigoReserva" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label for="numeroAsiento">Número de Asiento:</label>
+            <input type="text" id="numeroAsiento" name="numeroAsiento"/>
+        </div>
+
+        <div class="form-group">
+            <label for="clase">Clase:</label>
+            <select id="clase" name="clase">
+                <option value="Economica">Económica</option>
+                <option value="Ejecutiva">Ejecutiva</option>
+                <option value="Primera">Primera clase</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="precio">Precio del Boleto:</label>
+            <input type="number" id="precio" name="precio" step="0.01"/>
+        </div>
+
+        <div class="form-group">
+            <label>Servicios Especiales:</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="sillaRuedas" name="servicios" value="Silla de ruedas">
+                    <label for="sillaRuedas">Silla de ruedas</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="mascotas" name="servicios" value="Transporte de mascotas">
+                    <label for="mascotas">Transporte de mascotas</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="asistenciaMedica" name="servicios" value="Asistencia médica">
+                    <label for="asistenciaMedica">Asistencia médica</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="comidaEspecial" name="servicios" value="Comida especial">
+                    <label for="comidaEspecial">Comida especial</label>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="guardarReserva()">Guardar Reserva</button>
+        <button onclick="cancelarReserva()">Cancelar</button>
+    </div>
+
+    <h2>Lista de Reservas</h2>
+    <table id="tablaReservas">
+        <thead>
+            <tr>
+                <th>ID Reserva</th>
+                <th>Pasajero</th>
+                <th>Vuelo</th>
+                <th>Fecha Reserva</th>
+                <th>Código</th>
+                <th>Asiento</th>
+                <th>Clase</th>
+                <th>Precio</th>
+                <th>Servicios</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas de reservas se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        // Generar código de reserva automático al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            generarCodigoReserva();
+        });
+
+        function generarCodigoReserva() {
+            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let codigo = '';
+            for (let i = 0; i < 6; i++) {
+                codigo += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            }
+            document.getElementById('codigoReserva').value = codigo;
+        }
+
+        function guardarReserva() {
+            // Aquí iría la lógica para guardar la reserva
+            alert('Reserva guardada exitosamente');
+            // Limpiar formulario y generar nuevo código
+            document.getElementById('pasajero').value = '';
+            document.getElementById('vuelo').value = '';
+            document.getElementById('fechaReserva').value = '';
+            document.getElementById('numeroAsiento').value = '';
+            document.getElementById('clase').value = 'Economica';
+            document.getElementById('precio').value = '';
+            // Desmarcar checkboxes
+            const checkboxes = document.querySelectorAll('input[name="servicios"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            generarCodigoReserva();
+        }
+
+        function cancelarReserva() {
+            // Limpiar formulario
+            document.getElementById('pasajero').value = '';
+            document.getElementById('vuelo').value = '';
+            document.getElementById('fechaReserva').value = '';
+            document.getElementById('numeroAsiento').value = '';
+            document.getElementById('clase').value = 'Economica';
+            document.getElementById('precio').value = '';
+            const checkboxes = document.querySelectorAll('input[name="servicios"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            generarCodigoReserva();
+        }
+
+        function verReserva(idReserva) {
+            alert(`Visualizando reserva ${idReserva}`);
+            // Aquí iría la lógica para mostrar los detalles de la reserva
+        }
+
+        function editarReserva(idReserva) {
+            alert(`Editando reserva ${idReserva}`);
+            // Aquí iría la lógica para cargar los datos de la reserva en el formulario
+        }
+
+        function eliminarReserva(idReserva) {
+            if (confirm(`¿Está seguro que desea eliminar la reserva ${idReserva}?`)) {
+                alert(`Reserva ${idReserva} eliminada`);
+                // Aquí iría la lógica para eliminar la reserva de la tabla
+            }
+        }
+    </script>
+</body>
+</html>
