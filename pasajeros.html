@@ -3,76 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Pasajeros</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .contenedor {
+        background-color: #16094e;
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        max-width: 900px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #000000;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #000000;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="datetime-local"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #000000;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
+      input[type="radio"] {
+        margin-right: 5px;
+      }
+
+      button {
+        background-color: #1048af;
+        color: white;
+        padding: 8px 16px;
+        margin-top: 20px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #ce79d6;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 25px;
+      }
+
+      th, td {
+        border: 1px solid #000000;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+      }
+
+      .acciones button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px;
+        margin: 0 4px;
+      }
+
+      .acciones button:hover {
+        color: #2e8b57;
+        transform: scale(1.2);
+      }
+    </style>
+
 </head>
 <body>
-    <div class="contenedor">
-        <h1>Registro de Pasajeros</h1>
+    <div>
+      <h1>Registro de Pasajeros</h1>
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre"/>
-        <br><br>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre"/>
+      <br><br>
 
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido"/>
-        <br><br>
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido"/>
+      <br><br>
 
-        <label for="npasaporte">Número de Pasaporte:</label>
-        <input type="text" id="npasaporte" name="npasaporte"/>
-        <br><br>
+      <label for="npasaporte">Número de Pasaporte:</label>
+      <input type="text" id="npasaporte" name="npasaporte"/>
+      <br><br>
 
-        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-        <input type="datetime-local" id="fecha_nacimiento" name="fecha_nacimiento"/>
-        <br><br>
+      <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+      <input type="datetime-local" id="fecha_nacimiento" name="fecha_nacimiento"/>
+      <br><br>
 
-        <label for="genero">Genero:</label>
-        <br><br>
-        
-        <label for="masculino">Masculino:</label>
-        <input type="radio" id="genero" name="genero" />
-        <label for="femenino">Femenino:</label>
-        <input type="radio" id="genero" name="genero" />
-        <br><br>
+      <label for="genero">Genero:</label>
+      <br><br>
 
-        <label for="correo">Correo Electronico:</label>
-        <input type="email" id="correo" name="correo" />
-        <br><br>
+      <input type="radio" id="masculino" name="genero" value="Masculino" />
+      <label for="masculino">Masculino</label>
 
-        <label for="telefono">Numero Telefonico:</label>
-        <input type="text" id="telefono" name="telefono" />
-        <br><br>
+      <input type="radio" id="femenino" name="genero" value="Femenino" />
+      <label for="femenino">Femenino</label>
 
-        <label for="cemergencia">Contacto de Emergencia:</label>
-        <input type="text" id="cemergencia" name="cemergencia" />
-        <br><br>
+      <br><br>
+      <label for="correo">Correo Electronico:</label>
+      <input type="email" id="correo" name="correo" />
+      <br><br>
 
-        <button onclick="agregarFila()">Agregar a la tabla</button>
-        <br><br>
+      <label for="telefono">Numero Telefonico:</label>
+      <input type="text" id="telefono" name="telefono" />
+      <br><br>
 
-        <table id="tDatos">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Numero de Pasaporte</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Genero</th>
-                <th>Correo Electronico</th>
-                <th>Numero Telefonico</th>
-                <th>Contacto de Emergencia</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Filas agregadas aparecerán aquí -->
-            </tbody>
-          </table>
-          <br>
+      <label for="cemergencia">Contacto de Emergencia:</label>
+      <input type="text" id="cemergencia" name="cemergencia" />
+      <br><br>
 
-        <button onclick="Guardar()">Guardar</button>
-        <button onclick="Cancelar()">Cancelar</button>
-     
-    </div>  
+      <button onclick="agregarFila()">Agregar a la tabla</button>
+      <br><br>
+
+      <table id="tDatos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Numero de Pasaporte</th>
+              <th>Fecha de Nacimiento</th>
+              <th>Genero</th>
+              <th>Correo Electronico</th>
+              <th>Numero Telefonico</th>
+              <th>Contacto de Emergencia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- -->
+          </tbody>
+        </table>
+        <br>
+
+      <button onclick="Guardar()">Guardar</button>
+      <button onclick="Cancelar()">Cancelar</button>
+
+    </div>
+
+    <script>
+      function agregarFila() {
+        const nombre = document.getElementById('nombre').value.trim();
+        const apellido = document.getElementById('apellido').value.trim();
+        const npasaporte = document.getElementById('npasaporte').value.trim();
+        const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+        const genero = document.querySelector('input[name="genero"]:checked')?.value;
+        const correo = document.getElementById('correo').value;
+        const telefono = document.getElementById('telefono').value;
+        const cemergencia = document.getElementById('cemergencia').value;
+    
+        if (!nombre || !apellido || !npasaporte || !fecha_nacimiento || !genero || 
+            !correo || !telefono || !cemergencia) {
+          alert("Por favor, complete todos los campos.");
+          return;
+        }
+    
+        const tabla = document.getElementById('tDatos').getElementsByTagName('tbody')[0];
+        const nuevaFila = tabla.insertRow();
+    
+        nuevaFila.insertCell(0).textContent = nombre;
+        nuevaFila.insertCell(1).textContent = apellido;
+        nuevaFila.insertCell(2).textContent = npasaporte;
+        nuevaFila.insertCell(3).textContent = fecha_nacimiento;
+        nuevaFila.insertCell(4).textContent = genero;
+        nuevaFila.insertCell(5).textContent = correo;
+        nuevaFila.insertCell(6).textContent = telefono;
+        nuevaFila.insertCell(7).textContent = cemergencia;
+    
+        const celdaAcciones = nuevaFila.insertCell(8);
+
+        // Botón VER DATOS
+        const btnVer = document.createElement('button');
+        btnVer.innerHTML = '<i class="fa-duotone fa-solid fa-eye"></i>'; // ícono de ojo
+        btnVer.title = "Ver Datos";
+        btnVer.style.marginRight = "5px";
+        btnVer.onclick = function () {
+          alert(`Datos del pasajero:\n
+          Nombre: ${nombre}
+          Apellido: ${apellido}
+          Pasaporte: ${npasaporte}
+          Fecha de Nacimiento: ${fecha_nacimiento}
+          Género: ${genero}
+          Correo: ${correo}
+          Teléfono: ${telefono}
+          Contacto de Emergencia: ${cemergencia}`);
+        };
+        celdaAcciones.appendChild(btnVer);
+
+        // Botón EDITAR
+        const btnEditar = document.createElement('button');
+        btnEditar.innerHTML = '<i class="fa-sharp fa-solid fa-pencil"></i>'; // ícono de editar
+        btnEditar.title = "Editar";
+        btnEditar.style.marginRight = "5px";
+        btnEditar.onclick = function () {
+
+          // Puedes prellenar el formulario con los datos para editarlos
+          document.getElementById('nombre').value = nombre;
+          document.getElementById('apellido').value = apellido;
+          document.getElementById('npasaporte').value = npasaporte;
+          document.getElementById('fecha_nacimiento').value = fecha_nacimiento;
+          document.querySelector(`input[name="genero"][value="${genero}"]`).checked = true;
+          document.getElementById('correo').value = correo;
+          document.getElementById('telefono').value = telefono;
+          document.getElementById('cemergencia').value = cemergencia;
+          
+          // Opcional: eliminar la fila para que se reemplace al hacer clic en "Agregar"
+          tabla.deleteRow(nuevaFila.rowIndex - 1);
+        };
+        celdaAcciones.appendChild(btnEditar);
+
+        // Botón ELIMINAR
+        const btnEliminar = document.createElement('button');
+        btnEliminar.innerHTML = '<i class="fa-solid fa-eraser"></i>';
+        btnEliminar.title = "Eliminar";
+        btnEliminar.onclick = function () {
+          const confirmar = confirm("¿Estás seguro de que deseas eliminar este registro?");
+          if (confirmar) {
+            tabla.deleteRow(nuevaFila.rowIndex - 1);
+          }
+        };
+        celdaAcciones.appendChild(btnEliminar);
+    
+        // Limpiar campos
+        document.getElementById('nombre').value = "";
+        document.getElementById('apellido').value = "";
+        document.getElementById('npasaporte').value = "";
+        document.getElementById('fecha_nacimiento').value = "";
+        document.querySelectorAll('input[name="genero"]').forEach(r => r.checked = false);
+        document.getElementById('correo').value = "";
+        document.getElementById('telefono').value = "";
+        document.getElementById('cemergencia').value = "";
+
+        function Cancelar() {
+          if (confirm("¿Deseas limpiar los campos del formulario?")) {
+            document.getElementById("nombre").value = "";
+            document.getElementById("apellido").value = "";
+            document.getElementById("npasaporte").value = "";
+            document.getElementById("fecha_nacimiento").value = "";
+            document.getElementById("correo").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("cemergencia").value = "";
+
+            // Limpia los radios
+            document.getElementById("masculino").checked = false;
+            document.getElementById("femenino").checked = false;
+          }
+        }
+      } 
+    </script>
 
 </body>
 </html>
