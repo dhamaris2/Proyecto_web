@@ -1,238 +1,241 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Aerolíneas</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f4f8;
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Aerolíneas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f8;
+      color: #333;
+    }
 
-        header, footer {
-            background-color: #a2d2ff;
-            text-align: center;
-            padding: 20px;
-            border-bottom: 4px solid #0077b6;
-        }
+    header, footer {
+      background-color: #a2d2ff;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 4px solid #0077b6;
+    }
 
-        h1, h2 {
-            margin: 0;
-            padding: 10px 0;
-        }
+    h1, h2 {
+      margin: 0;
+      padding: 10px 0;
+    }
 
-        main {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .form-section form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+    .form-section form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
 
-        .form-section input,
-        .form-section select,
-        .form-section textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            width: 100%;
-        }
+    .form-section input,
+    .form-section select,
+    .form-section textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 50%;
+    }
 
-        .form-section textarea {
-            grid-column: span 2;
-            resize: none;
-        }
+    .form-section textarea {
+      grid-column: span 2;
+      resize: none;
+    }
 
-        .form-section button {
-            padding: 10px 15px;
-            border: none;
-            background-color: #48cae4;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-        }
+    .form-section button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #48cae4;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
 
-        .form-section button:hover {
-            background-color: #0096c7;
-        }
+    .form-section button:hover {
+      background-color: #0096c7;
+    }
 
-        .form-section button[type="reset"] {
-            background-color: #adb5bd;
-        }
+    .form-section button[type="reset"] {
+      background-color: #adb5bd;
+    }
 
-        .form-section button[type="reset"]:hover {
-            background-color: #6c757d;
-        }
+    .form-section button[type="reset"]:hover {
+      background-color: #6c757d;
+    }
 
-        .table-section {
-            margin-top: 40px;
-        }
+    .table-section {
+      margin-top: 40px;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background-color: #f9f9f9;
-            border-radius: 12px;
-            overflow: hidden;
-        }
+    .table-section table {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.9em;
+    }
 
-        th, td {
-            padding: 12px 16px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
+    th, td {
+      padding: 8px 7px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
 
-        th {
-            background-color: #bde0fe;
-        }
+    th {
+      background-color: #bde0fe;
+    }
 
-        tr:hover {
-            background-color: #e0f7fa;
-        }
+    tr:hover {
+      background-color: #e0f7fa;
+    }
 
-        td button {
-            padding: 6px 10px;
-            margin: 2px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+    td button {
+      padding: 6px 10px;
+      margin: 2px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-        td button:hover {
-            opacity: 0.8;
-        }
+    td button:hover {
+      opacity: 0.8;
+    }
 
-        td button:nth-child(1) { background-color: #38b000; color: white; } /* Ver */
-        td button:nth-child(2) { background-color: #ffb703; color: white; } /* Editar */
-        td button:nth-child(3) { background-color: #d90429; color: white; } /* Eliminar */
+    td button:nth-child(1) { background-color: #38b000; color: white; } /* Ver */
+    td button:nth-child(2) { background-color: #ffb703; color: white; } /* Editar */
+    td button:nth-child(3) { background-color: #d90429; color: white; } /* Eliminar */
 
-        footer {
-            margin-top: 40px;
-            border-top: 4px solid #0077b6;
-        }
-    </style>
+    footer {
+      margin-top: 40px;
+      border-top: 4px solid #0077b6;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Gestión de Aerolíneas</h1>
-        <p>Administra las compañías aéreas disponibles en el sistema</p>
-    </header>
+  <header>
+    <h1>Gestión de Aerolíneas</h1>
+    <p>Administra las compañías aéreas disponibles en el sistema</p>
+  </header>
 
-    <main>
-        <section class="form-section">
-            <h2>Registrar Nueva Aerolínea</h2>
-            <form id="airlineForm">
-                <input type="text" id="nombre" placeholder="Nombre de la aerolínea" required>
-                <input type="text" id="codigo" placeholder="Código IATA" maxlength="3" required>
-                <input type="text" id="pais" placeholder="País de origen" required>
-                <input type="number" id="fundacion" placeholder="Año de fundación" min="1900" max="2025" required>
-                <select id="estado" required>
-                    <option value="">Estado operativo</option>
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                    <option value="En reorganización">En reorganización</option>
-                </select>
-                <textarea id="descripcion" placeholder="Descripción" rows="3" required></textarea>
-                <button type="submit">Guardar</button>
-                <button type="reset">Cancelar</button>
-            </form>
-        </section>
+  <main>
+    <section class="form-section">
+      <h2>Registrar Nueva Aerolínea</h2>
+      <form id="airlineForm">
+        <input type="text" id="nombre" placeholder="Nombre de la aerolínea" required />
+        <input type="text" id="codigo" placeholder="Código IATA" maxlength="3" required />
+        <input type="text" id="pais" placeholder="País de origen" required />
+        <input type="number" id="fundacion" placeholder="Año de fundación" min="1900" max="2025" required />
+        <select id="estado" required>
+          <option value="">Estado operativo</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+          <option value="En reorganización">En reorganización</option>
+        </select>
+        <textarea id="descripcion" placeholder="Descripción" rows="3" required></textarea>
+        <button type="submit">Guardar</button>
+        <button type="reset">Cancelar</button>
+      </form>
+    </section>
 
-        <section class="table-section">
-            <h2>Aerolíneas Registradas</h2>
-            <table id="airlinesTable">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Código IATA</th>
-                        <th>País</th>
-                        <th>Año</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Se agregan dinámicamente -->
-                </tbody>
-            </table>
-        </section>
-    </main>
+    <section class="table-section">
+      <h2>Aerolíneas Registradas</h2>
+      <table id="airlinesTable">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Código IATA</th>
+            <th>País</th>
+            <th>Año</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se agregan dinámicamente -->
+        </tbody>
+      </table>
+    </section>
+  </main>
 
-    <footer>
-        <p>Sistema de Ventas de Boletos Aéreos &copy; 2023 - Sistema Aéreo</p>
-        <p>Versión 1.0.0</p>
-    </footer>
+  <footer>
+    <p>Sistema de Ventas de Boletos Aéreos &copy; 2023 - Sistema Aéreo</p>
+    <p>Versión 1.0.0</p>
+  </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("airlineForm");
-            const tableBody = document.querySelector("#airlinesTable tbody");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("airlineForm");
+      const tableBody = document.querySelector("#airlinesTable tbody");
 
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-                const nombre = document.getElementById("nombre").value;
-                const codigo = document.getElementById("codigo").value.toUpperCase();
-                const pais = document.getElementById("pais").value;
-                const fundacion = document.getElementById("fundacion").value;
-                const estado = document.getElementById("estado").value;
-                const descripcion = document.getElementById("descripcion").value;
+        const nombre = document.getElementById("nombre").value;
+        const codigo = document.getElementById("codigo").value.toUpperCase();
+        const pais = document.getElementById("pais").value;
+        const fundacion = document.getElementById("fundacion").value;
+        const estado = document.getElementById("estado").value;
+        const descripcion = document.getElementById("descripcion").value;
 
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${nombre}</td>
-                    <td>${codigo}</td>
-                    <td>${pais}</td>
-                    <td>${fundacion}</td>
-                    <td>${estado}</td>
-                    <td>
-                        <button onclick="verDescripcion('${descripcion.replace(/'/g, "\\'")}')">Ver</button>
-                        <button onclick="editarFila(this)">Editar</button>
-                        <button onclick="eliminarFila(this)">Eliminar</button>
-                    </td>
-                `;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${nombre}</td>
+          <td>${codigo}</td>
+          <td>${pais}</td>
+          <td>${fundacion}</td>
+          <td>${estado}</td>
+          <td>
+            <button onclick="verDescripcion('${descripcion.replace(/'/g, "\\'")}')">Ver</button>
+            <button onclick="editarFila(this)">Editar</button>
+            <button onclick="eliminarFila(this)">Eliminar</button>
+          </td>
+        `;
 
-                tableBody.appendChild(row);
-                form.reset();
-            });
-        });
+        tableBody.appendChild(row);
+        form.reset();
+        alert("¡Aerolínea registrada exitosamente!");
+      });
+    });
 
-        function verDescripcion(desc) {
-            alert("Descripción:\n" + desc);
-        }
+    function verDescripcion(desc) {
+      alert("Descripción:\n" + desc);
+    }
 
-        function eliminarFila(button) {
-            if (confirm("¿Estás seguro de eliminar esta aerolínea?")) {
-                const row = button.closest("tr");
-                row.remove();
-            }
-        }
+    function eliminarFila(button) {
+      if (confirm("¿Estás seguro de eliminar esta aerolínea?")) {
+        const row = button.closest("tr");
+        row.remove();
+      }
+    }
 
-        function editarFila(button) {
-            const row = button.closest("tr");
-            const cells = row.querySelectorAll("td");
+    function editarFila(button) {
+      const row = button.closest("tr");
+      const cells = row.querySelectorAll("td");
 
-            document.getElementById("nombre").value = cells[0].textContent;
-            document.getElementById("codigo").value = cells[1].textContent;
-            document.getElementById("pais").value = cells[2].textContent;
-            document.getElementById("fundacion").value = cells[3].textContent;
-            document.getElementById("estado").value = cells[4].textContent;
+      document.getElementById("nombre").value = cells[0].textContent;
+      document.getElementById("codigo").value = cells[1].textContent;
+      document.getElementById("pais").value = cells[2].textContent;
+      document.getElementById("fundacion").value = cells[3].textContent;
+      document.getElementById("estado").value = cells[4].textContent;
 
-            row.remove();
-        }
-    </script>
+      row.remove();
+    }
+  </script>
 </body>
 </html>
