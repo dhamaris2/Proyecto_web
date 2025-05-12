@@ -8,79 +8,101 @@
 
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
         margin: 0;
         padding: 20px;
       }
 
       .contenedor {
-        background-color: #16094e;
-        padding: 20px 30px;
+        background-color: #ffffff;
+        padding: 30px 40px;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        max-width: 900px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        max-width: 960px;
         margin: auto;
       }
 
       h1 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         text-align: center;
         color: #000000;
+        margin-bottom: 30px;
       }
 
       label {
         display: block;
         margin-top: 15px;
-        font-weight: bold;
+        font-weight: 600;
         color: #000000;
       }
 
       input[type="text"],
-      input[type="email"],
-      input[type="datetime-local"] {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #000000;
-        border-radius: 6px;
-        box-sizing: border-box;
+        input[type="email"],
+        input[type="datetime-local"] {
+          width: 100%;
+          padding: 10px 12px;
+          margin-top: 6px;
+          border: 1px solid #201c1c;
+          border-radius: 6px;
+          box-sizing: border-box;
+          transition: border 0.3s;
+      } 
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="datetime-local"]:focus {
+        border-color: #e05e08;
+        outline: none;
       }
 
       input[type="radio"] {
-        margin-right: 5px;
+        margin-right: 6px;
+        margin-left: 10px;
       }
 
       button {
         background-color: #1048af;
         color: white;
-        padding: 8px 16px;
+        padding: 10px 18px;
         margin-top: 20px;
-        margin-right: 10px;
+        margin-right: 12px;
         border: none;
-        border-radius: 8px;
+        border-radius: 6px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        font-size: 15px;
+        transition: background-color 0.3s, transform 0.2s;
       }
 
       button:hover {
-        background-color: #ce79d6;
+        background-color: #7a0d90;
+        transform: scale(1.03);
+      }
+
+      .botones-centrados {
+        text-align: center;
+        margin-top: 30px;
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 25px;
+        margin-top: 30px;
+        font-size: 14px;
+        background-color: #fff;
+        border: 1px solid #ccc;
       }
 
       th, td {
-        border: 1px solid #000000;
-        padding: 10px;
+        border: 1px solid #ccc;
+        padding: 12px;
         text-align: center;
       }
 
       th {
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
+        background-color: #f0f0f0;
+        color: #333;
+        font-weight: 600;
       }
 
       .acciones button {
@@ -90,10 +112,11 @@
         font-size: 18px;
         padding: 5px;
         margin: 0 4px;
+        color: #555;
       }
 
       .acciones button:hover {
-        color: #2e8b57;
+        color: #87b6df;
         transform: scale(1.2);
       }
     </style>
@@ -120,11 +143,10 @@
       <br><br>
 
       <label for="genero">Genero:</label>
-      <br><br>
+      <br>
 
       <input type="radio" id="masculino" name="genero" value="Masculino" />
       <label for="masculino">Masculino</label>
-
       <input type="radio" id="femenino" name="genero" value="Femenino" />
       <label for="femenino">Femenino</label>
 
@@ -135,14 +157,15 @@
 
       <label for="telefono">Numero Telefonico:</label>
       <input type="text" id="telefono" name="telefono" />
-      <br><br>
+      <br>
 
       <label for="cemergencia">Contacto de Emergencia:</label>
       <input type="text" id="cemergencia" name="cemergencia" />
-      <br><br>
+      <br>
 
-      <button onclick="agregarFila()">Agregar a la tabla</button>
-      <br><br>
+      <div class="botones-centrados">
+        <button onclick="agregarFila()">Agregar a la tabla</button>
+      </div>
 
       <table id="tDatos">
           <thead>
@@ -162,11 +185,11 @@
             <!-- -->
           </tbody>
         </table>
-        <br>
-
-      <button onclick="Guardar()">Guardar</button>
-      <button onclick="Cancelar()">Cancelar</button>
-
+      
+      <div class="botones-centrados">
+        <button onclick="guardarDatos()">Guardar</button>
+        <button onclick="cancelarFormulario()">Cancelar</button>
+      </div>
     </div>
 
     <script>
@@ -179,16 +202,16 @@
         const correo = document.getElementById('correo').value;
         const telefono = document.getElementById('telefono').value;
         const cemergencia = document.getElementById('cemergencia').value;
-    
-        if (!nombre || !apellido || !npasaporte || !fecha_nacimiento || !genero || 
+
+        if (!nombre || !apellido || !npasaporte || !fecha_nacimiento || !genero ||
             !correo || !telefono || !cemergencia) {
           alert("Por favor, complete todos los campos.");
           return;
         }
-    
+
         const tabla = document.getElementById('tDatos').getElementsByTagName('tbody')[0];
         const nuevaFila = tabla.insertRow();
-    
+
         nuevaFila.insertCell(0).textContent = nombre;
         nuevaFila.insertCell(1).textContent = apellido;
         nuevaFila.insertCell(2).textContent = npasaporte;
@@ -197,12 +220,12 @@
         nuevaFila.insertCell(5).textContent = correo;
         nuevaFila.insertCell(6).textContent = telefono;
         nuevaFila.insertCell(7).textContent = cemergencia;
-    
+
         const celdaAcciones = nuevaFila.insertCell(8);
 
         // Botón VER DATOS
         const btnVer = document.createElement('button');
-        btnVer.innerHTML = '<i class="fa-duotone fa-solid fa-eye"></i>'; // ícono de ojo
+        btnVer.innerHTML = '<i class="fa-solid fa-eye"></i>';
         btnVer.title = "Ver Datos";
         btnVer.style.marginRight = "5px";
         btnVer.onclick = function () {
@@ -220,12 +243,10 @@
 
         // Botón EDITAR
         const btnEditar = document.createElement('button');
-        btnEditar.innerHTML = '<i class="fa-sharp fa-solid fa-pencil"></i>'; // ícono de editar
+        btnEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
         btnEditar.title = "Editar";
         btnEditar.style.marginRight = "5px";
         btnEditar.onclick = function () {
-
-          // Puedes prellenar el formulario con los datos para editarlos
           document.getElementById('nombre').value = nombre;
           document.getElementById('apellido').value = apellido;
           document.getElementById('npasaporte').value = npasaporte;
@@ -234,15 +255,14 @@
           document.getElementById('correo').value = correo;
           document.getElementById('telefono').value = telefono;
           document.getElementById('cemergencia').value = cemergencia;
-          
-          // Opcional: eliminar la fila para que se reemplace al hacer clic en "Agregar"
+
           tabla.deleteRow(nuevaFila.rowIndex - 1);
         };
         celdaAcciones.appendChild(btnEditar);
 
         // Botón ELIMINAR
         const btnEliminar = document.createElement('button');
-        btnEliminar.innerHTML = '<i class="fa-solid fa-eraser"></i>';
+        btnEliminar.innerHTML = '<i class="fa-solid fa-trash"></i>';
         btnEliminar.title = "Eliminar";
         btnEliminar.onclick = function () {
           const confirmar = confirm("¿Estás seguro de que deseas eliminar este registro?");
@@ -251,34 +271,55 @@
           }
         };
         celdaAcciones.appendChild(btnEliminar);
-    
+
         // Limpiar campos
-        document.getElementById('nombre').value = "";
-        document.getElementById('apellido').value = "";
-        document.getElementById('npasaporte').value = "";
-        document.getElementById('fecha_nacimiento').value = "";
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("npasaporte").value = "";
+        document.getElementById("fecha_nacimiento").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("cemergencia").value = "";
         document.querySelectorAll('input[name="genero"]').forEach(r => r.checked = false);
-        document.getElementById('correo').value = "";
-        document.getElementById('telefono').value = "";
-        document.getElementById('cemergencia').value = "";
 
-        function Cancelar() {
-          if (confirm("¿Deseas limpiar los campos del formulario?")) {
-            document.getElementById("nombre").value = "";
-            document.getElementById("apellido").value = "";
-            document.getElementById("npasaporte").value = "";
-            document.getElementById("fecha_nacimiento").value = "";
-            document.getElementById("correo").value = "";
-            document.getElementById("telefono").value = "";
-            document.getElementById("cemergencia").value = "";
+      }
 
-            // Limpia los radios
-            document.getElementById("masculino").checked = false;
-            document.getElementById("femenino").checked = false;
-          }
+      function guardarDatos() {
+        const tabla = document.getElementById("tDatos").getElementsByTagName("tbody")[0];
+        const filas = tabla.getElementsByTagName("tr");
+        let datos = [];
+
+      for (let fila of filas) {
+        const celdas = fila.getElementsByTagName("td");
+        datos.push({
+          nombre: celdas[0].innerText,
+          apellido: celdas[1].innerText,
+          pasaporte: celdas[2].innerText,
+          nacimiento: celdas[3].innerText,
+          genero: celdas[4].innerText,
+          correo: celdas[5].innerText,
+          telefono: celdas[6].innerText,
+          emergencia: celdas[7].innerText
+        });
+      }
+
+      localStorage.setItem("pasajeros", JSON.stringify(datos));
+      alert("Datos guardados correctamente.");
+      }
+
+      function cancelarFormulario() {
+        if (confirm("¿Deseas limpiar los campos del formulario?")) {
+          document.getElementById("nombre").value = "";
+          document.getElementById("apellido").value = "";
+          document.getElementById("npasaporte").value = "";
+          document.getElementById("fecha_nacimiento").value = "";
+          document.getElementById("correo").value = "";
+          document.getElementById("telefono").value = "";
+          document.getElementById("cemergencia").value = "";
+          document.querySelectorAll('input[name="genero"]').forEach(r => r.checked = false);
         }
-      } 
-    </script>
+      }
+</script>
 
 </body>
 </html>
