@@ -200,3 +200,62 @@ footer {
     padding: 20px;
     margin-top: 40px;
 }
+
+.navbar {
+    background-color: var(--dark-color);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link i {
+    margin-right: 8px;
+}
+
+.active {
+    background-color: var(--primary-color);
+}
+
+/* Ajustes para el main cuando hay navbar */
+.has-navbar main {
+    margin-top: 1rem;
+}

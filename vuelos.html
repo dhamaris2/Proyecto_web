@@ -1,141 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Vuelos</title>
-  <link rel="stylesheet" href="CSS/estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Vuelos | SistemaAéreo</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<body class="has-navbar">
+    <!-- Menú de navegación -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <i class="fas fa-plane"></i>
+            SistemaAéreo
+        </a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vuelos.html" class="nav-link active">
+                    <i class="fas fa-plane"></i>
+                    Vuelos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pasajeros.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    Pasajeros
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="aerolineas.html" class="nav-link">
+                    <i class="fas fa-headset"></i>
+                    Aerolíneas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="venta_boletos.html" class="nav-link">
+                    <i class="fas fa-ticket-alt"></i>
+                    Boletos
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-<body>
+    <main>
+        <div class="form-container">
+            <h2>Registro de Vuelos</h2>
+            <form id="formVuelo">
+                <input type="hidden" id="indexEditar">
+                <input type="text" id="numero" placeholder="Número de vuelo" required>
+                <input type="text" id="origen" placeholder="Origen" required>
+                <input type="text" id="destino" placeholder="Destino" required>
+                <input type="date" id="fechaSalida" required>
+                <input type="time" id="horaSalida" required>
+                <input type="date" id="fechaLlegada" required>
+                <input type="time" id="horaLlegada" required>
+                <input type="text" id="aerolinea" placeholder="Aerolínea" required>
+                <select id="estado" required>
+                    <option value="">Estado</option>
+                    <option value="Programado">Programado</option>
+                    <option value="Retrasado">Retrasado</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+                <button type="submit">Agregar / Actualizar Vuelo</button>
+            </form>
+        </div>
 
-  <header>
-    <h1>Gestión de Vuelos</h1>
-    <p>Sistema de administración de vuelos</p>
-  </header>
+        <div class="table-container">
+            <h2>Listado de Vuelos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Salida</th>
+                        <th>Llegada</th>
+                        <th>Aerolínea</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaVuelos"></tbody>
+            </table>
+        </div>
+    </main>
 
-  <main>
-    <div class="form-container">
-      <h2>Registro de Vuelos</h2>
-      <form id="formVuelo">
-        <input type="hidden" id="indexEditar" />
-        <input type="text" id="numero" placeholder="Número de vuelo" required />
-        <input type="text" id="origen" placeholder="Origen" required />
-        <input type="text" id="destino" placeholder="Destino" required />
-        <input type="date" id="fechaSalida" required />
-        <input type="time" id="horaSalida" required />
-        <input type="date" id="fechaLlegada" required />
-        <input type="time" id="horaLlegada" required />
-        <input type="text" id="aerolinea" placeholder="Aerolínea" required />
-        <select id="estado" required>
-          <option value="">Estado</option>
-          <option value="Programado">Programado</option>
-          <option value="Retrasado">Retrasado</option>
-          <option value="Cancelado">Cancelado</option>
-        </select>
-        <button type="submit">Agregar / Actualizar Vuelo</button>
-      </form>
-    </div>
+    <footer>
+        <p>Sistema de Gestión de Vuelos &copy; 2023 - SistemaAéreo</p>
+        <p>Versión 1.0.0</p>
+    </footer>
 
-    <div class="table-container">
-      <h2>Listado de Vuelos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Número</th>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Salida</th>
-            <th>Llegada</th>
-            <th>Aerolínea</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tablaVuelos"></tbody>
-      </table>
-    </div>
-  </main>
+    <script>
+        // Tu código JavaScript existente aquí
+        const vuelos = [];
+        const form = document.getElementById('formVuelo');
+        const tabla = document.getElementById('tablaVuelos');
+        const indexEditar = document.getElementById('indexEditar');
 
-  <footer>
-    <p>Sistema de Gestión de Vuelos &copy; 2023</p>
-  </footer>
+        function renderizarTabla() {
+            tabla.innerHTML = '';
+            vuelos.forEach((v, i) => {
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${v.numero}</td>
+                        <td>${v.origen}</td>
+                        <td>${v.destino}</td>
+                        <td>${v.fechaSalida} ${v.horaSalida}</td>
+                        <td>${v.fechaLlegada} ${v.horaLlegada}</td>
+                        <td>${v.aerolinea}</td>
+                        <td>${v.estado}</td>
+                        <td>
+                            <button onclick="editar(${i})">Editar</button>
+                            <button onclick="eliminar(${i})">Eliminar</button>
+                        </td>
+                    </tr>`;
+            });
+        }
 
-  <script>
-    const vuelos = [];
-    const form = document.getElementById('formVuelo');
-    const tabla = document.getElementById('tablaVuelos');
-    const indexEditar = document.getElementById('indexEditar');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
 
-    function renderizarTabla() {
-      tabla.innerHTML = '';
-      vuelos.forEach((v, i) => {
-        tabla.innerHTML += `
-          <tr>
-            <td>${v.numero}</td>
-            <td>${v.origen}</td>
-            <td>${v.destino}</td>
-            <td>${v.fechaSalida} ${v.horaSalida}</td>
-            <td>${v.fechaLlegada} ${v.horaLlegada}</td>
-            <td>${v.aerolinea}</td>
-            <td>${v.estado}</td>
-            <td>
-              <button onclick="editar(${i})">Editar</button>
-              <button onclick="eliminar(${i})">Eliminar</button>
-            </td>
-          </tr>`;
-      });
-    }
+            const vuelo = {
+                numero: document.getElementById('numero').value,
+                origen: document.getElementById('origen').value,
+                destino: document.getElementById('destino').value,
+                fechaSalida: document.getElementById('fechaSalida').value,
+                horaSalida: document.getElementById('horaSalida').value,
+                fechaLlegada: document.getElementById('fechaLlegada').value,
+                horaLlegada: document.getElementById('horaLlegada').value,
+                aerolinea: document.getElementById('aerolinea').value,
+                estado: document.getElementById('estado').value
+            };
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+            if (indexEditar.value === '') {
+                vuelos.push(vuelo);
+            } else {
+                vuelos[indexEditar.value] = vuelo;
+                indexEditar.value = '';
+            }
 
-      const vuelo = {
-        numero: document.getElementById('numero').value,
-        origen: document.getElementById('origen').value,
-        destino: document.getElementById('destino').value,
-        fechaSalida: document.getElementById('fechaSalida').value,
-        horaSalida: document.getElementById('horaSalida').value,
-        fechaLlegada: document.getElementById('fechaLlegada').value,
-        horaLlegada: document.getElementById('horaLlegada').value,
-        aerolinea: document.getElementById('aerolinea').value,
-        estado: document.getElementById('estado').value
-      };
+            form.reset();
+            renderizarTabla();
+        });
 
-      if (indexEditar.value === '') {
-        vuelos.push(vuelo); // agregar nuevo
-      } else {
-        vuelos[indexEditar.value] = vuelo; // actualizar existente
-        indexEditar.value = '';
-      }
+        function editar(i) {
+            const v = vuelos[i];
+            document.getElementById('numero').value = v.numero;
+            document.getElementById('origen').value = v.origen;
+            document.getElementById('destino').value = v.destino;
+            document.getElementById('fechaSalida').value = v.fechaSalida;
+            document.getElementById('horaSalida').value = v.horaSalida;
+            document.getElementById('fechaLlegada').value = v.fechaLlegada;
+            document.getElementById('horaLlegada').value = v.horaLlegada;
+            document.getElementById('aerolinea').value = v.aerolinea;
+            document.getElementById('estado').value = v.estado;
+            indexEditar.value = i;
+        }
 
-      form.reset();
-      renderizarTabla();
-    });
+        function eliminar(i) {
+            if (confirm('¿Eliminar este vuelo?')) {
+                vuelos.splice(i, 1);
+                renderizarTabla();
+            }
+        }
 
-    function editar(i) {
-      const v = vuelos[i];
-      document.getElementById('numero').value = v.numero;
-      document.getElementById('origen').value = v.origen;
-      document.getElementById('destino').value = v.destino;
-      document.getElementById('fechaSalida').value = v.fechaSalida;
-      document.getElementById('horaSalida').value = v.horaSalida;
-      document.getElementById('fechaLlegada').value = v.fechaLlegada;
-      document.getElementById('horaLlegada').value = v.horaLlegada;
-      document.getElementById('aerolinea').value = v.aerolinea;
-      document.getElementById('estado').value = v.estado;
-      indexEditar.value = i;
-    }
-
-    function eliminar(i) {
-      if (confirm('¿Eliminar este vuelo?')) {
-        vuelos.splice(i, 1);
         renderizarTabla();
-      }
-    }
-
-    renderizarTabla();
-  </script>
-
+    </script>
 </body>
 </html>
