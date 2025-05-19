@@ -1,55 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pasajeros</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Pasajeros</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #cfa9d6;
+      padding: 20px;
+    }
+
+    .contenedor {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 960px;
+      margin: auto;
+    }
+
+    .acciones button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px;
+      margin: 0 4px;
+      color: #50d144;
+    }
+
+    .acciones button:hover {
+      color: #87b6df;
+      transform: scale(1.2);
+    }
+
+    .btn-purple {
+      background-color: #66095e;
+      color: white;
+    }
+
+    .btn-purple:hover {
+      background-color: #7a0d90;
+    }
+  </style>
 </head>
 <body>
-    <h1>Registro de Pasajeros</h1>
+  <div class="contenedor">
+    <h1 class="text-center mb-4">Registro de Pasajeros</h1>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre"/>
-    <br>
+    <form>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" />
+        </div>
+        <div class="col-md-6">
+          <label for="apellido" class="form-label">Apellido:</label>
+          <input type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido" />
+        </div>
+      </div>
 
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" name="apellido"/>
-    <br>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="npasaporte" class="form-label">Número de Pasaporte:</label>
+          <input type="text" class="form-control" id="npasaporte" placeholder="Ingrese su número de pasaporte" />
+        </div>
+        <div class="col-md-6">
+          <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" id="fecha_nacimiento" />
+        </div>
+      </div>
 
-    <label for="npasaporte">Número de Pasaporte:</label>
-    <input type="text" id="npasaporte" name="npasaporte"/>
-    <br>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label d-block">Género:</label>
+          <div class="form-check form-check-inline">
+            <input type="radio" id="masculino" name="genero" value="Masculino" class="form-check-input" />
+            <label for="masculino" class="form-check-label">Masculino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" id="femenino" name="genero" value="Femenino" class="form-check-input" />
+            <label for="femenino" class="form-check-label">Femenino</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="correo" class="form-label">Correo Electrónico:</label>
+          <input type="text" class="form-control" id="correo" />
+        </div>
+      </div>
 
-    <label for="fnacimiento">Fecha de Nacimiento:</label>
-    <input type="datetime" id="fnacimiento" name="fnacimiento"/>
-    <br>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="telefono" class="form-label">Número Telefónico:</label>
+          <input type="text" class="form-control" id="telefono" placeholder="Ingrese su número de teléfono" />
+        </div>
+        <div class="col-md-6">
+          <label for="cemergencia" class="form-label">Contacto de Emergencia:</label>
+          <input type="text" class="form-control" id="cemergencia" placeholder="Ingrese su contacto de emergencia" />
+        </div>
+      </div>
 
-    <label for="genero">Genero:</label>
-    <br>
-    <label for="masculino">Masculino:</label>
-    <input type="radio" id="genero" name="genero" />
-    <label for="femenino">Femenino:</label>
-    <input type="radio" id="genero" name="genero" />
-    <br>
+      <div class="text-center mb-4">
+        <button type="button" class="btn btn-purple" onclick="agregarFila()">Agregar a la tabla</button>
+      </div>
+    </form>
 
-    <label for="correo">Correo Electronico:</label>
-    <input type="email" id="correo" name="correo" />
-    <br>
+    <div class="table-responsive mb-4">
+      <table class="table table-bordered table-striped text-center" id="tDatos">
+        <thead class="table-light">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Pasaporte</th>
+            <th>Nacimiento</th>
+            <th>Género</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Emergencia</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-    <label for="telefono">Numero Telefonico:</label>
-    <input type="text" id="telefono" name="telefono" />
-    <br>
+    <div class="text-center">
+      <button class="btn btn-success me-2" onclick="guardarDatos()">Guardar</button>
+      <button class="btn btn-danger" onclick="cancelarFormulario()">Cancelar</button>
+    </div>
+  </div>
 
-    <!--<label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" />
-    <br> -->
+  <script>
+    function agregarFila() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const npasaporte = document.getElementById('npasaporte').value.trim();
+      const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+      const genero = document.querySelector('input[name="genero"]:checked')?.value;
+      const correo = document.getElementById('correo').value;
+      const telefono = document.getElementById('telefono').value;
+      const cemergencia = document.getElementById('cemergencia').value;
 
-    <label for="cemergencia">Contacto de Emergencia:</label>
-    <input type="text" id="cemergencia" name="cemergencia" />
-    <br>
+      if (!nombre || !apellido || !npasaporte || !fecha_nacimiento || !genero ||
+          !correo || !telefono || !cemergencia) {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
 
-    <button onclick="Guardar()">Guardar</button>
-    <button onclick="Cancelar()">Cancelar</button>
+      const tabla = document.getElementById('tDatos').getElementsByTagName('tbody')[0];
+      const nuevaFila = tabla.insertRow();
 
+      nuevaFila.insertCell(0).textContent = nombre;
+      nuevaFila.insertCell(1).textContent = apellido;
+      nuevaFila.insertCell(2).textContent = npasaporte;
+      nuevaFila.insertCell(3).textContent = fecha_nacimiento;
+      nuevaFila.insertCell(4).textContent = genero;
+      nuevaFila.insertCell(5).textContent = correo;
+      nuevaFila.insertCell(6).textContent = telefono;
+      nuevaFila.insertCell(7).textContent = cemergencia;
+
+      const celdaAcciones = nuevaFila.insertCell(8);
+
+      const btnVer = document.createElement('button');
+      btnVer.innerHTML = '<i class="fa-solid fa-eye"></i>';
+      btnVer.title = "Ver Datos";
+      btnVer.classList.add("acciones");
+      btnVer.onclick = () => {
+        alert(`Datos del pasajero:\n
+        Nombre: ${nombre}
+        Apellido: ${apellido}
+        Pasaporte: ${npasaporte}
+        Nacimiento: ${fecha_nacimiento}
+        Género: ${genero}
+        Correo: ${correo}
+        Teléfono: ${telefono}
+        Emergencia: ${cemergencia}`);
+      };
+      celdaAcciones.appendChild(btnVer);
+
+      const btnEditar = document.createElement('button');
+      btnEditar.innerHTML = '<i class="fa-solid fa-pen"></i>';
+      btnEditar.title = "Editar";
+      btnEditar.classList.add("acciones");
+      btnEditar.onclick = () => {
+        document.getElementById('nombre').value = nombre;
+        document.getElementById('apellido').value = apellido;
+        document.getElementById('npasaporte').value = npasaporte;
+        document.getElementById('fecha_nacimiento').value = fecha_nacimiento;
+        document.querySelector(`input[name="genero"][value="${genero}"]`).checked = true;
+        document.getElementById('correo').value = correo;
+        document.getElementById('telefono').value = telefono;
+        document.getElementById('cemergencia').value = cemergencia;
+
+        tabla.deleteRow(nuevaFila.rowIndex - 1);
+      };
+      celdaAcciones.appendChild(btnEditar);
+
+      const btnEliminar = document.createElement('button');
+      btnEliminar.innerHTML = '<i class="fa-solid fa-trash"></i>';
+      btnEliminar.title = "Eliminar";
+      btnEliminar.classList.add("acciones");
+      btnEliminar.onclick = () => {
+        if (confirm("¿Deseas eliminar este registro?")) {
+          tabla.deleteRow(nuevaFila.rowIndex - 1);
+        }
+      };
+      celdaAcciones.appendChild(btnEliminar);
+
+      // Limpiar campos
+      document.querySelectorAll('input').forEach(i => i.value = '');
+      document.querySelectorAll('input[name="genero"]').forEach(r => r.checked = false);
+    }
+
+    function guardarDatos() {
+      const tabla = document.getElementById("tDatos").getElementsByTagName("tbody")[0];
+      const filas = tabla.getElementsByTagName("tr");
+      let datos = [];
+
+      for (let fila of filas) {
+        const celdas = fila.getElementsByTagName("td");
+        datos.push({
+          nombre: celdas[0].innerText,
+          apellido: celdas[1].innerText,
+          pasaporte: celdas[2].innerText,
+          nacimiento: celdas[3].innerText,
+          genero: celdas[4].innerText,
+          correo: celdas[5].innerText,
+          telefono: celdas[6].innerText,
+          emergencia: celdas[7].innerText
+        });
+      }
+
+      localStorage.setItem("pasajeros", JSON.stringify(datos));
+      alert("Datos guardados correctamente.");
+    }
+
+    function cancelarFormulario() {
+      if (confirm("¿Deseas limpiar los campos del formulario?")) {
+        document.querySelectorAll('input').forEach(i => i.value = '');
+        document.querySelectorAll('input[name="genero"]').forEach(r => r.checked = false);
+      }
+    }
+  </script>
 </body>
 </html>
