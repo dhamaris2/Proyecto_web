@@ -3,270 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Reservas</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .action-icon {
-            cursor: pointer;
-            margin-right: 5px;
-        }
-        
-        body {
-            font-family: "Times New Roman", Times, serif;
-        }
-
-        /* Estilo para la tabla */
-        .table {
-            background-color: #3548f3;
-        }
-        
-        .table-purple thead {
-            background-color: #3447ec;;
-            color: white;
-        }
-        
-        .table-purple tbody tr:hover {
-            background-color: #3e51ff;
-        }
-       
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .card-header {
-            border-radius: 10px 10px 0 0 !important;
-        }
-        
-        .form-control, .form-select {
-            border-radius: 5px;
-            border: 1px solid #ced4da;
-            padding: 8px 12px;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: #9c27b0;
-            box-shadow: 0 0 0 0.25rem rgba(68, 10, 230, 0.25);
-        }
-        
-        .btn-primary {
-            background-color: #6a1b9a;
-            border-color: #6a1b9a;
-        }
-        
-        .btn-primary:hover {
-            background-color: #7b1fa2;
-            border-color: #7b1fa2;
-        }
-        
-        .form-check-input:checked {
-            background-color: #6a1b9a;
-            border-color: #6a1b9a;
-        }
-    </style>
+    <title>Venta de Boletos | SistemaAéreo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/estilos.css">
 </head>
-<body>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mb-4 text-center">Gestión de Reservas de Vuelo</h1>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Formulario de Reserva</h5>
+<body class="has-navbar">
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <i class="fas fa-plane"></i>
+            SistemaAéreo
+        </a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vuelos.html" class="nav-link">
+                    <i class="fas fa-plane"></i>
+                    Vuelos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pasajeros.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    Pasajeros
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="aerolineas.html" class="nav-link">
+                    <i class="fas fa-headset"></i>
+                    Aerolíneas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="venta_boletos.html" class="nav-link active">
+                    <i class="fas fa-ticket-alt"></i>
+                    Boletos
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container my-4 p-4 bg-white rounded shadow" style="max-width: 800px;">
+            <h3 class="mb-4">Venta de Boletos</h3>
+
+            <form id="boletoForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Pasajero:</label>
+                        <select class="form-select" id="pasajero" required>
+                            <option value="" selected disabled>Seleccione un pasajero</option>
+                            <!-- Opciones se llenarán dinámicamente -->
+                        </select>
                     </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="row mb-3">
-                                <div class="col-md-6 mb-3">
-                                    <label for="pasajero" class="form-label">Pasajero (registrado):</label>
-                                    <select id="pasajero" name="pasajero" class="form-select">
-                                     <option value="" selected disabled>-- Seleccione una pasajero --</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="vuelo" class="form-label">Vuelo (registrado):</label>
-                                    <select id="vuelo" name="vuelo" class="form-select">
-                                   <option value="" selected disabled>-- Seleccione un vuelo --</option>
-                                    </select>
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <div class="col-md-4 mb-3">
-                                    <label for="fechaReserva" class="form-label">Fecha de Reserva:</label>
-                                    <input type="date" id="fechaReserva" name="fechaReserva" class="form-control"/>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="codigoReserva" class="form-label">Código de Reserva:</label>
-                                    <input type="text" id="codigoReserva" name="codigoReserva" class="form-control" readonly/>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="numeroAsiento" class="form-label">Número de Asiento:</label>
-                                    <input type="text" id="numeroAsiento" name="numeroAsiento" class="form-control"/>
-                                </div>
-                            </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Vuelo:</label>
+                        <select class="form-select" id="vuelo" required>
+                            <option value="" selected disabled>Seleccione un vuelo</option>
+                            <!-- Opciones se llenarán dinámicamente -->
+                        </select>
+                    </div>
 
-                            <div class="row mb-3">
-                                <div class="col-md-6 mb-3">
-                                    <label for="clase" class="form-label">Clase:</label>
-                                    <select id="clase" name="clase" class="form-select">
-                                        <option value="" selected disabled>-- Seleccione una clase --</option>
-                                        <option value="Economica">Económica</option>
-                                        <option value="Ejecutiva">Ejecutiva</option>
-                                        <option value="Primera">Primera clase</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="precio" class="form-label">Precio del Boleto:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" id="precio" name="precio" step="0.01" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de reserva:</label>
+                        <input type="date" class="form-control" id="fechaReserva" required>
+                    </div>
 
-                            <div class="row mb-4">
-                                <div class="col-12">
-                                    <label class="form-label">Servicios Especiales:</label>
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 mb-2">
-                                            <div class="form-check">
-                                                <input type="checkbox" id="sillaRuedas" name="servicios" value="Silla de ruedas" class="form-check-input">
-                                                <label for="sillaRuedas" class="form-check-label">Silla de ruedas</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-2">
-                                            <div class="form-check">
-                                                <input type="checkbox" id="mascotas" name="servicios" value="Transporte de mascotas" class="form-check-input">
-                                                <label for="mascotas" class="form-check-label">Transporte de mascotas</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-2">
-                                            <div class="form-check">
-                                                <input type="checkbox" id="asistenciaMedica" name="servicios" value="Asistencia médica" class="form-check-input">
-                                                <label for="asistenciaMedica" class="form-check-label">Asistencia médica</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-2">
-                                            <div class="form-check">
-                                                <input type="checkbox" id="comidaEspecial" name="servicios" value="Comida especial" class="form-check-input">
-                                                <label for="comidaEspecial" class="form-check-label">Comida especial</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Asiento:</label>
+                        <input type="text" class="form-control" id="asiento" placeholder="Ej: 12A" required>
+                    </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="d-flex justify-content-end">
-                                        <button type="button" class="btn btn-primary me-2 px-4 py-2" onclick="guardarReserva()">Guardar Reserva</button>
-                                        <button type="button" class="btn btn-secondary px-4 py-2" onclick="cancelarReserva()">Cancelar</button>
-                                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Clase:</label>
+                        <select class="form-select" id="clase" required>
+                            <option value="" selected disabled>Seleccione clase</option>
+                            <option value="Economica">Económica</option>
+                            <option value="Ejecutiva">Ejecutiva</option>
+                            <option value="Primera">Primera Clase</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Precio ($):</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" id="precio" min="0" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Estado del boleto:</label>
+                        <option value="" selected disabled>Seleccione un estado</option>
+                        <select class="form-select" id="estado" required>
+                            <option value="Reservado" selected>Reservado</option>
+                            <option value="Confirmado">Confirmado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Servicios adicionales:</label>
+                        <div class="row">
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sillaRuedas" value="Silla de ruedas">
+                                    <label class="form-check-label" for="sillaRuedas">Silla de ruedas</label>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="mascota" value="Mascota">
+                                    <label class="form-check-label" for="mascota">Transporte de mascota</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="comidaEspecial" value="Comida especial">
+                                    <label class="form-check-label" for="comidaEspecial">Comida especial</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="asistenciaMedica" value="Asistencia médica">
+                                    <label class="form-check-label" for="asistenciaMedica">Asistencia médica</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3 text-center">
+                        <button type="submit" class="btn btn-primary me-2" id="btnGuardar">Guardar Boleto</button>
+                        <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <h2 class="mb-3">Lista de Reservas</h2>
-                <div class="table-responsive">
-                    <table id="tablaReservas" class="table table table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID Reserva</th>
-                                <th>Pasajero</th>
-                                <th>Vuelo</th>
-                                <th>Fecha Reserva</th>
-                                <th>Código</th>
-                                <th>Asiento</th>
-                                <th>Clase</th>
-                                <th>Precio</th>
-                                <th>Servicios</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Las filas de reservas se agregarán aquí dinámicamente -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="table-container mt-4">
+            <h2>Boletos Vendidos</h2>
+            <table id="tablaBoletos" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pasajero</th>
+                        <th>Vuelo</th>
+                        <th>Fecha Reserva</th>
+                        <th>Asiento</th>
+                        <th>Clase</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Servicios</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-    </div>
+    </main>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <p>Sistema de Gestión de Vuelos &copy; 2023 - SistemaAéreo</p>
+        <p>Versión 1.0.0</p>
+    </footer>
+
     <script>
-        // Generar código de reserva automático al cargar la página
-       // Generar código de reserva automático al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            generarCodigoReserva();
+            const form = document.getElementById('boletoForm');
+            const tabla = document.querySelector('#tablaBoletos tbody');
+            let editIndex = -1;
+            let boletos = [];
+
+            // Cargar datos de ejemplo (opcional)
+            cargarDatosEjemplo();
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const servicios = [];
+                if (document.getElementById('sillaRuedas').checked) servicios.push('Silla de ruedas');
+                if (document.getElementById('mascota').checked) servicios.push('Mascota');
+                if (document.getElementById('comidaEspecial').checked) servicios.push('Comida especial');
+                if (document.getElementById('asistenciaMedica').checked) servicios.push('Asistencia médica');
+
+                const boleto = {
+                    pasajero: document.getElementById('pasajero').value,
+                    vuelo: document.getElementById('vuelo').value,
+                    fechaReserva: document.getElementById('fechaReserva').value,
+                    asiento: document.getElementById('asiento').value,
+                    clase: document.getElementById('clase').value,
+                    precio: parseFloat(document.getElementById('precio').value).toFixed(2),
+                    estado: document.getElementById('estado').value,
+                    servicios: servicios.join(', ')
+                };
+
+                if (editIndex === -1) {
+                    agregarBoleto(boleto);
+                } else {
+                    actualizarBoleto(editIndex, boleto);
+                    editIndex = -1;
+                    document.getElementById('btnGuardar').textContent = 'Guardar Boleto';
+                }
+
+                form.reset();
+            });
+
+            document.getElementById('btnCancelar').addEventListener('click', function() {
+                if (confirm('¿Desea cancelar y limpiar el formulario?')) {
+                    form.reset();
+                    editIndex = -1;
+                    document.getElementById('btnGuardar').textContent = 'Guardar Boleto';
+                }
+            });
+
+            function cargarDatosEjemplo() {
+                // Opcional: Datos de ejemplo iniciales
+                const pasajerosSelect = document.getElementById('pasajero');
+                const vuelosSelect = document.getElementById('vuelo');
+                
+                pasajerosSelect.innerHTML = '<option value="" selected disabled>Seleccione un pasajero</option>';
+                vuelosSelect.innerHTML = '<option value="" selected disabled>Seleccione un vuelo</option>';
+                
+                const pasajerosEjemplo = [
+                    'Juan Rodriguez - PAS123456',
+                    'Amelia Salazar - PAS654321',
+                    'Karina Vasquez - PAS987654'
+                ];
+                
+                const vuelosEjemplo = [
+                    'LA678 - Lima a Bogotá - 15/06/2023',
+                    'DE890 - Quito a Miami - 16/06/2023',
+                    'AV654 - Bogotá a Madrid - 17/06/2023'
+                ];
+                
+                pasajerosEjemplo.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p;
+                    option.textContent = p;
+                    pasajerosSelect.appendChild(option);
+                });
+                
+                vuelosEjemplo.forEach(v => {
+                    const option = document.createElement('option');
+                    option.value = v;
+                    option.textContent = v;
+                    vuelosSelect.appendChild(option);
+                });
+            }
+
+            function agregarBoleto(boleto) {
+                const fila = tabla.insertRow();
+                llenarFila(fila, boleto);
+                boletos.push(boleto);
+            }
+
+            function llenarFila(fila, boleto) {
+                const celdas = [
+                    tabla.rows.length,
+                    boleto.pasajero,
+                    boleto.vuelo,
+                    boleto.fechaReserva,
+                    boleto.asiento,
+                    boleto.clase,
+                    `$${boleto.precio}`,
+                    `<span class="badge ${getBadgeClass(boleto.estado)}">${boleto.estado}</span>`,
+                    boleto.servicios || 'Ninguno'
+                ];
+
+                celdas.forEach(texto => {
+                    const celda = fila.insertCell();
+                    celda.innerHTML = texto;
+                });
+
+                const celdaAcciones = fila.insertCell();
+                celdaAcciones.innerHTML = `
+                    <button class="btn btn-sm btn-warning me-1" onclick="editarBoleto(${tabla.rows.length - 1})">Editar</button>
+                    <button class="btn btn-sm btn-danger" onclick="eliminarBoleto(${tabla.rows.length - 1})">Eliminar</button>
+                `;
+            }
+
+            function getBadgeClass(estado) {
+                switch(estado) {
+                    case 'Confirmado': return 'bg-success';
+                    case 'Cancelado': return 'bg-danger';
+                    default: return 'bg-primary';
+                }
+            }
+
+            window.editarBoleto = function(index) {
+                const boleto = boletos[index];
+                document.getElementById('pasajero').value = boleto.pasajero;
+                document.getElementById('vuelo').value = boleto.vuelo;
+                document.getElementById('fechaReserva').value = boleto.fechaReserva;
+                document.getElementById('asiento').value = boleto.asiento;
+                document.getElementById('clase').value = boleto.clase;
+                document.getElementById('precio').value = boleto.precio;
+                document.getElementById('estado').value = boleto.estado;
+                
+                // checkboxes de servicios
+                const servicios = boleto.servicios.split(', ');
+                document.getElementById('sillaRuedas').checked = servicios.includes('Silla de ruedas');
+                document.getElementById('mascota').checked = servicios.includes('Mascota');
+                document.getElementById('comidaEspecial').checked = servicios.includes('Comida especial');
+                document.getElementById('asistenciaMedica').checked = servicios.includes('Asistencia médica');
+                
+                editIndex = index;
+                document.getElementById('btnGuardar').textContent = 'Actualizar Boleto';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            window.eliminarBoleto = function(index) {
+                if (confirm('¿Está seguro de eliminar este boleto?')) {
+                    tabla.deleteRow(index);
+                    boletos.splice(index, 1);
+                    
+                    const filas = tabla.querySelectorAll('tr');
+                    filas.forEach((fila, i) => {
+                        fila.cells[0].textContent = i + 1;
+                    });
+                }
+            };
         });
-
-        function generarCodigoReserva() {
-            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let codigo = '';
-            for (let i = 0; i < 6; i++) {
-                codigo += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            }
-            document.getElementById('codigoReserva').value = codigo;
-        }
-
-        function guardarReserva() {
-            // Aquí iría la lógica para guardar la reserva
-            alert('Reserva guardada exitosamente');
-            // Limpiar formulario y generar nuevo código
-            document.getElementById('pasajero').value = '';
-            document.getElementById('vuelo').value = '';
-            document.getElementById('fechaReserva').value = '';
-            document.getElementById('numeroAsiento').value = '';
-            document.getElementById('precio').value = '';
-            // Desmarcar checkboxes
-            const checkboxes = document.querySelectorAll('input[name="servicios"]');
-            checkboxes.forEach(checkbox => checkbox.checked = false);
-            generarCodigoReserva();
-        }
-
-        function cancelarReserva() {
-            // Limpiar formulario
-            document.getElementById('pasajero').value = '';
-            document.getElementById('vuelo').value = '';
-            document.getElementById('fechaReserva').value = '';
-            document.getElementById('numeroAsiento').value = '';
-            // Resetear el selector de clase al placeholder
-            document.getElementById('clase').selectedIndex = 0;
-            document.getElementById('precio').value = '';
-            // Desmarcar checkboxes
-            const checkboxes = document.querySelectorAll('input[name="servicios"]');
-            checkboxes.forEach(checkbox => checkbox.checked = false);
-            generarCodigoReserva();
-        }
-
-        function verReserva(idReserva) {
-            alert(`Visualizando reserva ${idReserva}`);
-        }
-
-        function editarReserva(idReserva) {
-            alert(`Editando reserva ${idReserva}`);
-        }
-
-        function eliminarReserva(idReserva) {
-            if (confirm(`¿Está seguro que desea eliminar la reserva ${idReserva}?`)) {
-                alert(`Reserva ${idReserva} eliminada`);
-            }
-        }
-
     </script>
 </body>
 </html>
