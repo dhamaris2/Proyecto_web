@@ -114,7 +114,8 @@
                 </div>
 
                 <div class="mt-4 text-center">
-                    <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar Vuelo</button>
+                    <button type="submit" class="btn btn-primary me-2" id="btnGuardar">Guardar Vuelo</button>
+                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -150,6 +151,7 @@
         //empieza el java
         const form = document.getElementById("vueloForm");
         const tabla = document.querySelector("#tablaVuelos tbody");
+        const btnCancelar = document.getElementById("btnCancelar");
         let editIndex = -1;
 
         form.addEventListener("submit", function (e) {
@@ -176,6 +178,15 @@
         }
 
             form.reset();
+        });
+
+        // Evento para el botón Cancelar
+        btnCancelar.addEventListener("click", function() {
+            if (confirm("¿Está seguro que desea cancelar el formulario? Todos los datos no guardados se perderán.")) {
+                form.reset();
+                editIndex = -1;
+                document.getElementById("btnGuardar").textContent = "Guardar Vuelo";
+            }
         });
 
         function agregarVuelo(vuelo) {
