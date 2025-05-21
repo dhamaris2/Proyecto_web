@@ -253,8 +253,14 @@
 
         function eliminarFila(boton) {
             if (confirm("¿Deseas eliminar este vuelo?")) {
-            const fila = boton.closest("tr");
-            fila.remove();
+                const fila = boton.closest("tr");
+                fila.remove();
+
+                // Reordenar los números de fila
+                const filas = tabla.querySelectorAll("tr");
+                filas.forEach((fila, index) => {
+                    fila.cells[0].textContent = index + 1;
+                });
             }
         }
     </script>

@@ -259,3 +259,37 @@ footer {
 .has-navbar main {
     margin-top: 1rem;
 }
+
+/* Estilos específicos para la tabla de aerolíneas */
+#tablaAerolineas {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#tablaAerolineas th, 
+#tablaAerolineas td {
+    padding: 10px 12px;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+#tablaAerolineas th {
+    background-color: #f8f9fa;
+    position: sticky;
+    top: 0;
+}
+
+#tablaAerolineas td:nth-child(8) { /* Columna Descripción */
+    white-space: normal;
+    min-width: 200px;
+}
+
+#tablaAerolineas td:nth-child(1), /* Columna # */
+#tablaAerolineas td:nth-child(3), /* Columna Código */
+#tablaAerolineas td:nth-child(5) { /* Columna Año */
+    text-align: center;
+}
+
+.acciones-cell {
+    white-space: nowrap;
+}

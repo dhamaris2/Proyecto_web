@@ -3,215 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Aerolíneas</title>
+    <title>Gestión de Aerolíneas | SistemaAéreo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/estilos.css">
     <style>
- 
-        body {
-            font-family: "Times New Roman", Times, serif;
+        /* Estilos adicionales para mejorar la visualización */
+        .table-container {
+            padding: 20px;
+            overflow-x: auto;
         }
-     .compact-header {
-            background-color: #a2d2ff;
-            padding: 1rem;
-            border-bottom: 3px solid #0077b6;
+        
+        #tablaAerolineas {
+            width: 100%;
+            table-layout: fixed;
         }
-        .compact-card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: none;
+        
+        #tablaAerolineas th, #tablaAerolineas td {
+            padding: 12px;
+            vertical-align: middle;
         }
-        .form-label-inline {
-            display: flex;
-            align-items: center;
+        
+        #tablaAerolineas th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
         }
-        .form-label-inline label {
-            font-size: 0.9rem;
-            color: #495057;
-            margin-right: 0.5rem;
-            width: 120px; /* Ajusta este valor según necesites */
-            flex-shrink: 0; /* Evita que la etiqueta se encoja */
-            text-align: right; /* Alinea el texto de la etiqueta a la derecha */
+        
+        .descripcion-cell {
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 300px;
         }
-        .form-label-inline .form-control, .form-label-inline .form-select {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.9rem;
-            flex-grow: 1;
-        }
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-        }
-        .table-sm td, .table-sm th {
-            padding: 0.5rem;
-        }
-        .action-buttons .btn {
-            margin: 0 2px;
-            min-width: 50px;
-        }
-        .btn-view { background-color: #38b000; }
-        .btn-edit { background-color: #ffb703; }
-        .btn-delete { background-color: #d90429; }
-        .compact-footer {
-            background-color: #a2d2ff;
-            padding: 1rem;
-            border-top: 3px solid #0077b6;
-            font-size: 0.85rem;
+        
+        .acciones-cell {
+            white-space: nowrap;
         }
     </style>
 </head>
-<body>
-    <header class="compact-header text-center mb-3">
-        <h1 class="h4 mb-1 fw-bold">Gestión de Aerolíneas</h1>
-        <p class="mb-0 small">Administración de compañías aéreas</p>
-    </header>
+<body class="has-navbar">
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <i class="fas fa-plane"></i>
+            SistemaAéreo
+        </a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vuelos.html" class="nav-link active">
+                    <i class="fas fa-plane"></i>
+                    Vuelos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pasajeros.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    Pasajeros
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="aerolineas.html" class="nav-link">
+                    <i class="fas fa-headset"></i>
+                    Aerolíneas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="venta_boletos.html" class="nav-link">
+                    <i class="fas fa-ticket-alt"></i>
+                    Boletos
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card compact-card mb-4">
-                    <div class="card-body">
-                        <h2 class="h5 card-title mb-3">Nueva Aerolínea</h2>
-                        <form id="airlineForm" class="compact-form">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="nombre">Nombre:</label>
-                                        <input type="text" class="form-control form-control-sm" id="nombre" placeholder="Nombre" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="codigo">Código:</label>
-                                        <input type="text" class="form-control form-control-sm" id="codigo" placeholder="Código IATA" maxlength="3" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="pais">País:</label>
-                                        <input type="text" class="form-control form-control-sm" id="pais" placeholder="País" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="fundacion">Año:</label>
-                                        <input type="number" class="form-control form-control-sm" id="fundacion" placeholder="Año fundación" min="1900" max="2025" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="estado">Estado:</label>
-                                        <select class="form-select form-select-sm" id="estado" required>
-                                            <option value="">Estado operativo</option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
-                                            <option value="En reorganización">En reorganización</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-label-inline">
-                                        <label for="descripcion">Descripción:</label>
-                                        <textarea class="form-control form-control-sm" id="descripcion" placeholder="Descripción breve" rows="1" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
-                            <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
-                        </form>
+    <main>
+        <div class="container my-4 p-4 bg-white rounded shadow" style="max-width: 800px;">
+            <h3 class="mb-4">Registro de Aerolíneas</h3>
+
+            <form id="aerolineaForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre de aerolínea:</label>
+                        <input type="text" class="form-control" placeholder="Nombre aerolínea" id="nombreAe" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Código:</label>
+                        <input type="text" class="form-control" placeholder="Código IATA" id="codigoAe" required maxlength="3">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">País de origen:</label>
+                        <input type="text" class="form-control" placeholder="País Origen" id="paisOr" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Año de fundación:</label>
+                        <input type="number" class="form-control" placeholder="Año fundación" id="fundacion" min="1900" max="2099" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono de contacto:</label>
+                        <input type="tel" class="form-control" placeholder="Contacto" id="telContacto" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Estado:</label>
+                        <select class="form-select" id="estadoAe" required>
+                            <option value="" selected disabled>Seleccione el estado</option>
+                            <option>Activo</option>
+                            <option>Inactivo</option>
+                            <option>En reorganización</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" placeholder="Descripción breve" rows="3"></textarea>
                     </div>
                 </div>
 
-                <div class="card compact-card">
-                    <div class="card-body">
-                        <h2 class="h5 card-title mb-3">Aerolíneas Registradas</h2>
-                        <div class="table-responsive">
-                            <table class="table table-sm table-hover mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Código</th>
-                                        <th>País</th>
-                                        <th>Año</th>
-                                        <th>Estado</th>
-                                        <th class="text-end">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="airlinesTable">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary me-2" id="btnGuardar">Guardar Aerolínea</button>
+                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
 
-    <footer class="compact-footer text-center mt-4">
-        <p class="mb-0 small">Sistema de Ventas de Boletos Aéreos &copy; 2023 - Versión 1.0.0</p>
+        <div class="table-container">
+            <h2>Aerolíneas Registradas</h2>
+            <table id="tablaAerolineas" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 9%">Nombre</th>
+                        <th style="width: 8%">Código</th>
+                        <th style="width: 9%">País</th>
+                        <th style="width: 8%">Año</th>
+                        <th style="width: 10%">Contacto</th>
+                        <th style="width: 10%">Estado</th>
+                        <th style="width: 20%">Descripción</th>
+                        <th style="width: 10%">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>Sistema de Gestión de Vuelos &copy; 2025 - SistemaAéreo</p>
+        <p>Versión 1.0.0</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("airlineForm");
-            const tableBody = document.querySelector("#airlinesTable");
+        const form = document.getElementById("aerolineaForm");
+        const tabla = document.querySelector("#tablaAerolineas tbody");
+        const btnCancelar = document.getElementById("btnCancelar");
+        let editIndex = -1;
 
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-                const nombre = document.getElementById("nombre").value;
-                const codigo = document.getElementById("codigo").value.toUpperCase();
-                const pais = document.getElementById("pais").value;
-                const fundacion = document.getElementById("fundacion").value;
-                const estado = document.getElementById("estado").value;
-                const descripcion = document.getElementById("descripcion").value;
+            const aerolinea = {
+                nombre: document.getElementById("nombreAe").value,
+                codigo: document.getElementById("codigoAe").value,
+                pais: document.getElementById("paisOr").value,
+                año: document.getElementById("fundacion").value,
+                telefono: document.getElementById("telContacto").value,
+                estado: document.getElementById("estadoAe").value,
+                descripcion: document.getElementById("descripcion").value
+            };
 
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td class="align-middle">${nombre}</td>
-                    <td class="align-middle">${codigo}</td>
-                    <td class="align-middle">${pais}</td>
-                    <td class="align-middle">${fundacion}</td>
-                    <td class="align-middle"><span class="badge ${estado === 'Activo' ? 'bg-success' : estado === 'Inactivo' ? 'bg-danger' : 'bg-warning'}">${estado}</span></td>
-                    <td class="text-end action-buttons">
-                        <button class="btn btn-view btn-sm text-white" onclick="verDescripcion('${descripcion.replace(/'/g, "\\'")}')">Ver</button>
-                        <button class="btn btn-edit btn-sm text-white" onclick="editarFila(this)">Editar</button>
-                        <button class="btn btn-delete btn-sm text-white" onclick="eliminarFila(this)">Eliminar</button>
-                    </td>
-                `;
+            if (editIndex === -1){
+                agregarAero(aerolinea);
+            } else {
+                actualizarAero(editIndex, aerolinea);
+                editIndex = -1;
+                document.getElementById("btnGuardar").textContent = "Guardar Aerolínea";
+            }
 
-                tableBody.appendChild(row);
-                form.reset();
-            });
+            form.reset();
         });
 
-        function verDescripcion(desc) {
-            alert("Descripción:\n" + desc);
-        }
-
-        function eliminarFila(button) {
-            if (confirm("¿Estás seguro de eliminar esta aerolínea?")) {
-                const row = button.closest("tr");
-                row.remove();
+        btnCancelar.addEventListener("click", function(){
+            if (confirm("¿Está seguro que desea cancelar el formulario? Todos los datos no guardados se perderán.")) {
+                form.reset();
+                editIndex = -1;
+                document.getElementById("btnGuardar").textContent = "Guardar Aerolínea";
             }
+        });
+
+        function agregarAero(aerolinea) {
+            const fila = tabla.insertRow();
+            llenarFila(fila, aerolinea);
         }
 
-        function editarFila(button) {
-            const row = button.closest("tr");
-            const cells = row.querySelectorAll("td");
+        function llenarFila(fila, aerolinea) {
+            // Crear celdas con estilos específicos
+            const numeroCelda = fila.insertCell();
+            numeroCelda.textContent = tabla.rows.length;
+            numeroCelda.style.textAlign = "center";
 
-            document.getElementById("nombre").value = cells[0].textContent;
-            document.getElementById("codigo").value = cells[1].textContent;
-            document.getElementById("pais").value = cells[2].textContent;
-            document.getElementById("fundacion").value = cells[3].textContent;
-            document.getElementById("estado").value = cells[4].querySelector("span").textContent;
+            const nombreCelda = fila.insertCell();
+            nombreCelda.textContent = aerolinea.nombre;
 
-            row.remove();
+            const codigoCelda = fila.insertCell();
+            codigoCelda.textContent = aerolinea.codigo;
+            codigoCelda.style.textAlign = "center";
+
+            const paisCelda = fila.insertCell();
+            paisCelda.textContent = aerolinea.pais;
+
+            const añoCelda = fila.insertCell();
+            añoCelda.textContent = aerolinea.año;
+            añoCelda.style.textAlign = "center";
+
+            const telefonoCelda = fila.insertCell();
+            telefonoCelda.textContent = aerolinea.telefono;
+
+            const estadoCelda = fila.insertCell();
+            estadoCelda.textContent = aerolinea.estado;
+            
+            // Celda de descripción con clase especial
+            const descripcionCelda = fila.insertCell();
+            descripcionCelda.textContent = aerolinea.descripcion;
+            descripcionCelda.className = "descripcion-cell";
+
+            // Celda de acciones
+            const accionesCelda = fila.insertCell();
+            accionesCelda.className = "acciones-cell";
+            accionesCelda.innerHTML = `
+                <button class="btn btn-sm btn-warning me-1" onclick="editarFila(this)">Editar</button>
+                <button class="btn btn-sm btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+            `;
+        }
+
+        function editarFila(boton) {
+            const fila = boton.closest("tr");
+            editIndex = fila.rowIndex - 1;
+
+            const celdas = fila.cells;
+            document.getElementById("nombreAe").value = celdas[1].textContent;
+            document.getElementById("codigoAe").value = celdas[2].textContent;
+            document.getElementById("paisOr").value = celdas[3].textContent;
+            document.getElementById("fundacion").value = celdas[4].textContent;
+            document.getElementById("telContacto").value = celdas[5].textContent;
+            document.getElementById("estadoAe").value = celdas[6].textContent;
+            document.getElementById("descripcion").value = celdas[7].textContent;
+
+            document.getElementById("btnGuardar").textContent = "Actualizar Aerolínea";
+            
+            // Scroll suave al formulario
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function actualizarAero(index, aerolinea) {
+            const fila = tabla.rows[index];
+            fila.innerHTML = "";
+            llenarFila(fila, aerolinea);
+        }
+
+        function eliminarFila(boton) {
+            if (confirm("¿Deseas eliminar esta aerolínea?")) {
+                const fila = boton.closest("tr");
+                fila.remove();
+
+                // Reordenar los números de fila
+                const filas = tabla.querySelectorAll("tr");
+                filas.forEach((fila, index) => {
+                    fila.cells[0].textContent = index + 1;
+                });
+            }
         }
     </script>
 </body>
