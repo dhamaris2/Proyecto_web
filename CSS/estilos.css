@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos */
 :root {
     --primary-color: #0056b3;
     --secondary-color: #003366;
@@ -41,7 +41,7 @@ main {
     padding: 0 1rem;
 }
 
-/* Estilos para la tabla de vuelos */
+/* tabla de vuelos */
 .flight-status {
     background-color: white;
     border-radius: 8px;
@@ -57,7 +57,7 @@ main {
     padding-bottom: 0.5rem;
 }
 
-/* Estilos para las acciones rápidas */
+/* acciones rápidas */
 .quick-actions h2 {
     color: #2c3e50;
     margin-bottom: 1.5rem;
@@ -99,7 +99,7 @@ main {
     font-size: 1.1rem;
 }
 
-/* Estilos para tablas generales */
+/* tablas generales */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -122,7 +122,7 @@ tr:hover {
     background-color: #f8f9fa;
 }
 
-/* Estilos específicos para la página de Gestión de Vuelos */
+
 .form-container {
     background-color: white;
     border-radius: 8px;
@@ -168,7 +168,7 @@ tr:hover {
     background-color: var(--secondary-color);
 }
 
-/* Estilos para botones de acciones */
+/* botones de acciones */
 button {
     padding: 8px 12px;
     border: none;
@@ -192,7 +192,7 @@ button[onclick^="eliminar"] {
     color: white;
 }
 
-/* Estilos para el footer */
+/* footer */
 footer {
     background: var(--dark-color);
     color: white;
@@ -255,12 +255,12 @@ footer {
     background-color: var(--primary-color);
 }
 
-/* Ajustes para el main cuando hay navbar */
+/* el main cuando hay navbar */
 .has-navbar main {
     margin-top: 1rem;
 }
 
-/* Estilos específicos para la tabla de aerolíneas */
+/* tabla de aerolíneas */
 #tablaAerolineas {
     table-layout: fixed;
     width: 100%;
@@ -284,9 +284,9 @@ footer {
     min-width: 200px;
 }
 
-#tablaAerolineas td:nth-child(1), /* Columna # */
-#tablaAerolineas td:nth-child(3), /* Columna Código */
-#tablaAerolineas td:nth-child(5) { /* Columna Año */
+#tablaAerolineas td:nth-child(1), 
+#tablaAerolineas td:nth-child(3), 
+#tablaAerolineas td:nth-child(5) {
     text-align: center;
 }
 

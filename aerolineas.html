@@ -7,39 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/estilos.css">
-    <style>
-        /* Estilos adicionales para mejorar la visualización */
-        .table-container {
-            padding: 20px;
-            overflow-x: auto;
-        }
-        
-        #tablaAerolineas {
-            width: 100%;
-            table-layout: fixed;
-        }
-        
-        #tablaAerolineas th, #tablaAerolineas td {
-            padding: 12px;
-            vertical-align: middle;
-        }
-        
-        #tablaAerolineas th {
-            background-color: #f8f9fa;
-            position: sticky;
-            top: 0;
-        }
-        
-        .descripcion-cell {
-            white-space: normal;
-            word-wrap: break-word;
-            max-width: 300px;
-        }
-        
-        .acciones-cell {
-            white-space: nowrap;
-        }
-    </style>
 </head>
 <body class="has-navbar">
     <nav class="navbar">
@@ -215,14 +182,14 @@
 
             const codigoCelda = fila.insertCell();
             codigoCelda.textContent = aerolinea.codigo;
-            codigoCelda.style.textAlign = "center";
+            //codigoCelda.style.textAlign = "center";
 
             const paisCelda = fila.insertCell();
             paisCelda.textContent = aerolinea.pais;
 
             const añoCelda = fila.insertCell();
             añoCelda.textContent = aerolinea.año;
-            añoCelda.style.textAlign = "center";
+            //añoCelda.style.textAlign = "center";
 
             const telefonoCelda = fila.insertCell();
             telefonoCelda.textContent = aerolinea.telefono;
@@ -239,12 +206,31 @@
             const accionesCelda = fila.insertCell();
             accionesCelda.className = "acciones-cell";
             accionesCelda.innerHTML = `
-                <button class="btn btn-sm btn-warning me-1" onclick="editarFila(this)">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+                <i class="fas fa-eye icono-accion text-primary mx-1" title="Ver" onclick="verAerolinea(this)"></i>
+                <i class="fas fa-edit icono-accion text-warning mx-1" title="Editar" onclick="editarFila(this)"></i>
+                <i class="fas fa-trash-alt icono-accion text-danger mx-1" title="Eliminar" onclick="eliminarFila(this)"></i>
             `;
         }
 
-        function editarFila(boton) {
+        window.verAerolinea = function(icono) {
+            const fila = icono.closest("tr");
+            const celdas = fila.cells;
+            
+            const mensaje = `
+                Detalles de la Aerolínea:
+                Nombre: ${celdas[1].textContent}
+                Código IATA: ${celdas[2].textContent}
+                País de Origen: ${celdas[3].textContent}
+                Año de Fundación: ${celdas[4].textContent}
+                Teléfono: ${celdas[5].textContent}
+                Estado: ${celdas[6].textContent}
+                Descripción: ${celdas[7].textContent}
+            `;
+            
+            alert(mensaje);
+        };
+
+        window.editarFila = function(boton) {
             const fila = boton.closest("tr");
             editIndex = fila.rowIndex - 1;
 
@@ -261,7 +247,7 @@
             
             // Scroll suave al formulario
             form.scrollIntoView({ behavior: 'smooth' });
-        }
+        };
 
         function actualizarAero(index, aerolinea) {
             const fila = tabla.rows[index];
@@ -269,7 +255,7 @@
             llenarFila(fila, aerolinea);
         }
 
-        function eliminarFila(boton) {
+        window.eliminarFila = function(boton) {
             if (confirm("¿Deseas eliminar esta aerolínea?")) {
                 const fila = boton.closest("tr");
                 fila.remove();
@@ -280,7 +266,7 @@
                     fila.cells[0].textContent = index + 1;
                 });
             }
-        }
+        };
     </script>
 </body>
 </html>

@@ -202,9 +202,30 @@
 
             const celdaAcciones = fila.insertCell();
             celdaAcciones.innerHTML = `
-                <button class="btn btn-sm btn-warning me-1" onclick="editarFila(this)">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+                <i class="fas fa-eye icono-accion text-primary mx-1" title="Ver" onclick="verPasajero(this)"></i>
+                <i class="fas fa-edit icono-accion text-warning mx-1" title="Editar" onclick="editarFila(this)"></i>
+                <i class="fas fa-trash-alt icono-accion text-danger mx-1" title="Eliminar" onclick="eliminarFila(this)"></i>
             `;
+        }
+
+        // Función para mostrar los datos del pasajero en un alert
+        function verPasajero(boton) {
+            const fila = boton.closest("tr");
+            const datos = fila.querySelectorAll("td");
+            
+            const mensaje = `
+                Información del Pasajero:
+                Nombre: ${datos[1].textContent}
+                Apellido: ${datos[2].textContent}
+                Pasaporte: ${datos[3].textContent}
+                Fecha de Nacimiento: ${datos[4].textContent}
+                Género: ${datos[5].textContent}
+                Correo: ${datos[6].textContent}
+                Teléfono: ${datos[7].textContent}
+                Contacto de Emergencia: ${datos[8].textContent}
+            `;
+            
+            alert(mensaje);
         }
 
         function editarFila(boton) {

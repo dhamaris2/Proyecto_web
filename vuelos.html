@@ -216,9 +216,28 @@
 
         const celdaAcciones = fila.insertCell();
         celdaAcciones.innerHTML = `
-            <button class="btn btn-sm btn-warning me-1" onclick="editarFila(this)">Editar</button>
-            <button class="btn btn-sm btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+            <i class="fas fa-eye icono-accion text-primary mx-1" title="Ver" onclick="verVuelo(this)"></i>
+            <i class="fas fa-edit icono-accion text-warning mx-1" title="Editar" onclick="editarFila(this)"></i>
+            <i class="fas fa-trash-alt icono-accion text-danger mx-1" title="Eliminar" onclick="eliminarFila(this)"></i>
         `;
+        }
+
+        function verVuelo(boton) {
+            const fila = boton.closest("tr");
+            const datos = fila.querySelectorAll("td");
+            
+            const mensaje = `
+                Información Vuelo:
+                Número de vuelo: ${datos[1].textContent}
+                Origen: ${datos[2].textContent}
+                Destino: ${datos[3].textContent}
+                Aerolínea: ${datos[4].textContent}
+                Estado de vuelo: ${datos[5].textContent}
+                Salida: ${datos[6].textContent}
+                Llegada: ${datos[7].textContent}
+            `;
+            
+            alert(mensaje);
         }
 
 
